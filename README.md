@@ -16,8 +16,10 @@ An agent will be equipped with sensing capabilities to collect raw data (409 in 
 The state of the agent consists of 409 observable features.
 
 ## Rewards
-The reward after every decision is calculated as a weighted linear combination of the feature values observed in that frame. Here the reward rt in the tth frame, is calculated by the dot product of the weight vector w with the vector of feature values in tth frame, that is the state vector φt. Such that rt =wT ∗φt.
+The reward after every decision is calculated as a weighted linear combination of the feature values observed in that frame. Here the reward rt in the tth frame, is calculated by the dot product of the weight vector w with the vector of feature values in tth frame, that is the state vector φt. Such that ```rt =wT ∗φt```.
 
 ## Inverse RL
-- item1 
-- item 2
+- The features or the **basis functions** ```φi``` which are basically observable in the state. We define ```φ(st)``` to be the sum of all the feature expectations ```φi``` such that: ```phi(st) = φ1 + φ2 + ......φn```.
+- **Rewards rt** - Linear combination of these feature values observed at each state st. ```r(s,a,s′) = w1φ1 +w2φ2 +...+wnφn = wT ∗φ(st)```.
+
+

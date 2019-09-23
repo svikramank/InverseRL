@@ -1,2 +1,2 @@
-# InverseRL
-Apprenticeship learning using Inverse Reinforcement Learning
+# Apprenticeship learning using Inverse Reinforcement Learning
+

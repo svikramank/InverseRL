@@ -69,15 +69,19 @@ class IRL_Agent:
 
 
 	def optimalWeightFinder(self):
+		f = open('weights-optimal.txt', 'w')
+
 		while True:
 			W = self.optimization() # Optimize to find new weights in the list of policies
 			print("weights ::", W)
+			f.write((str(W)))
+			f.write('\n')
 			print("The distances ::", self.policiesFE.keys())
 			self.currentT = self.policyListUpdater(W)
 			print("Current distance (t) is ::", self.currentT)
 			if self.currentT <= self.epsilon:  # terminate if the point reached close enough
 				break 
-
+		f.close()
 		return W
 
 

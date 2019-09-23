@@ -14,3 +14,6 @@ An agent will be equipped with sensing capabilities to collect raw data (409 in 
 
 ## State Space
 The state of the agent consists of 409 observable features.
+
+## Rewards
+The reward after every decision is calculated as a weighted linear combination of the feature values observed in that frame. Here the reward rt in the tth frame, is calculated by the dot product of the weight vector w with the vector of feature values in tth frame, that is the state vector φt. Such that rt =wT ∗φt.

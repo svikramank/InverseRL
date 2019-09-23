@@ -21,5 +21,10 @@ The reward after every decision is calculated as a weighted linear combination o
 ## Inverse RL
 - The features or the **basis functions** ```φi``` which are basically observable in the state. We define ```φ(st)``` to be the sum of all the feature expectations ```φi``` such that: ```phi(st) = φ1 + φ2 + ......φn```.
 - **Rewards rt** - Linear combination of these feature values observed at each state st. ```r(s,a,s′) = w1φ1 +w2φ2 +...+wnφn = wT ∗φ(st)```.
+- ***Feature expectations μ(π)*** of a policy π is the sum of discounted feature values φ(st). ```μ(π) = 􏰂∞t=0 γtφ(st).```
+The feature expectations of a policy are independent of weights, they only depend on the state visited during the run (according to the policy) and on the discount factor γ a number between 0 and 1 (e.g. 0.9 in our case). To obtain the feature expectations of a policy we have to execute the policy in real time with the agent and record the states visited and the feature values obtained.
 
+- ***Initialization*** 
+  - Expert policy feature expectations or the expert’s feature expectations ```μ(πE)``` are obtained by the actions that are taken according to the expert behavior. We basically execute this policy and get the feature expectations as we do with any other policy. The expert feature expectations are given to the IRL algorithm to find the weights such that the reward funciton corresponding to the weights resemebles the underlying reward function that the expert is trying to maximize (in usual RL language).
+  - Random policy feature expectations - execute a random policy and use the feature expectations obtained to initialize IRL.
 

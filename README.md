@@ -28,3 +28,5 @@ The feature expectations of a policy are independent of weights, they only depen
   - Expert policy feature expectations or the expert’s feature expectations ```μ(πE)``` are obtained by the actions that are taken according to the expert behavior. We basically execute this policy and get the feature expectations as we do with any other policy. The expert feature expectations are given to the IRL algorithm to find the weights such that the reward funciton corresponding to the weights resemebles the underlying reward function that the expert is trying to maximize (in usual RL language).
   - Random policy feature expectations - execute a random policy and use the feature expectations obtained to initialize IRL.
 
+
+![Algorithm](ss.png)

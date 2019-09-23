@@ -7,7 +7,9 @@ Reinforcement learning (RL) is is the very basic and most intuitive form of tria
 In our case, we assume the actions taken by the humans are sub-optimal and we need the RL agent to take better actions. Apprenticeship Learning via IRL will try to inder the goal of a teacher. It will learn a reward function from observations, which can then be used for reinforcement learning. If it discovers that the goal is to hit a nail with a hammer, it will ignore blinks and scratches from the teacher, as they are irrelevant to the goal.
 
 ## How to Run
-Run the ```irl_main.py``` file. It contains the main code in which DQN and all the other necessary modules have been called. Once the DQN policy has been trained enough (met the condition of IRL) it will return a ```model.h5``` file which will be our trained policy. We can then load this policy and execute in our environment to calculate the mean and SD of the new reward values we are getting. 
+- Run the ```irl_main.py``` file. It contains the main code in which DQN and all the other necessary modules have been called. Once the DQN policy has been trained enough (met the condition of IRL) it will return a ```model.h5``` file which will be our trained policy. We can then load this policy and execute in our environment to calculate the mean and SD of the new reward values we are getting. 
+- You also might want to change the ```TRAINING_FRAMES``` variable in ```DQN.py``` and ```NUM_OF_EPOCHS``` in ```simulator.py``` file. 
+
 
 
 ## Agent

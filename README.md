@@ -10,6 +10,7 @@ In our case, we assume the actions taken by the humans are sub-optimal and we ne
 - Run the ```irl_main.py``` file. It contains the main code in which DQN and all the other necessary modules have been called. Once the DQN policy has been trained enough (met the condition of IRL) it will return a ```model.h5``` file which will be our trained policy. We can then load this policy and execute in our environment to calculate the mean and SD of the new reward values we are getting. 
 - You also might want to change the ```TRAINING_FRAMES``` variable in ```DQN.py``` and ```NUM_OF_EPOCHS``` in ```simulator.py``` file. 
 - At the end you will be having a ```model.h5``` which is your trained policy and ```weights-optimal.txt``` file which is the set of weights for the most recent reward function. 
+- Once trained, run the ```test_play.py``` file to generate some rollouts on the trained policy using the most recent set of weights. This file generates rollouts for 2000 timesteps and calculates mean reward and standard deviation of the rewards along with feature expectation vector. 
 
 
 

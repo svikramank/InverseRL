@@ -12,6 +12,8 @@ import scipy
 from cvxopt import matrix, solvers 
 from keras.models import Sequential
 from keras.layers import Dense
+import tensorflow as tf
+from keras import losses
 from keras.optimizers import Adam
 from collections import deque
 import data_process
@@ -100,8 +102,8 @@ env = Environment(transition_model)
 
 STATE_SPACE_DIM = len(newdf.iloc[0,0]) 
 RANDOM_REWARD = newdf.reward
-TRAINING_FRAMES = 100
-UPDATE_TARGET_NETWORK = 25
+TRAINING_FRAMES = 10000
+UPDATE_TARGET_NETWORK = 50
 
 class DQN:
 	def __init__(self):
@@ -110,7 +112,7 @@ class DQN:
 		self.epsilon_min = 0.0
 		self.epsilon_decay = 0.80
 		self.tau = 0.125
-		self.learning_rate = 0.005
+		self.learning_rate = 0.0005
 		self.memory = deque(maxlen=2000)
 		self.model = self.create_model()
 		self.target_model = self.create_model()
@@ -123,7 +125,7 @@ class DQN:
 		model.add(Dense(24, activation='relu'))
 		model.add(Dense(10, activation='relu'))
 		model.add(Dense(1))
-		model.compile(loss='mean_squared_error', optimizer=Adam(lr=self.learning_rate))
+		model.compile(loss='logcosh', optimizer=Adam(lr=self.learning_rate))
 		return model 
 
 

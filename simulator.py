@@ -12,14 +12,16 @@ import scipy
 from cvxopt import matrix, solvers 
 from keras.models import Sequential
 from keras.layers import Dense
+from keras import losses
 from keras.optimizers import Adam
+import tensorflow as tf
 
 
 ####################################################################################################################################
 #################### WRITE A DUMMY SIMULATOR #######################################################################################
 ####################################################################################################################################
 
-NUM_OF_EPOCHS = 5
+NUM_OF_EPOCHS = 50
 
 def simulator(newdf):
 	# This simulator basically takes input as a state s and action a and spits out the next state s' i.e the new state is 'a' is taken in state 's'. 
@@ -54,10 +56,16 @@ def simulator(newdf):
 	model.add(Dense(30, input_dim=len(newdf.iloc[0,0]) + 1, activation= 'relu'))
 	model.add(Dense(20, activation='relu'))
 	model.add(Dense(len(newdf.iloc[0,0])))
-	model.compile(loss='mean_squared_error', optimizer= Adam(lr= 0.001))
+	model.compile(loss='logcosh', optimizer= Adam(lr= 0.0001))
 
 	print("Started training...")
 	model.fit(X_stack, y_stack, epochs=NUM_OF_EPOCHS, verbose=1)
 	print("Simulator trained to predict s' from (s,a)...")
 
+	model.save("transition_model.h5")
+
 	return model
+
+
+
+

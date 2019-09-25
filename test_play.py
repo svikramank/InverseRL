@@ -72,11 +72,6 @@ class Environment:
 		return self.next_state[0], self.reward
 
 
-transition_model = load_model('transition_model.h5')
-
-# Create the environment
-env = Environment(transition_model)
-
 
 def load_trained_weights(feature_weights):
 	#load the weights for reward function
@@ -134,6 +129,14 @@ def test_play(model_name, env, newdf, feature_weights):
 
 
 if __name__ == '__main__':
+
+
+	# load the transition model
+	transition_model = load_model('transition_model.h5')
+
+	# Create the environment
+	env = Environment(transition_model)
+
 	print("###########################################")
 	print("### STARTING TO TEST THE TRAINED POLICY ###")
 	print("###########################################")

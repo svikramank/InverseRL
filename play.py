@@ -10,7 +10,6 @@ import random
 from keras.models import load_model
 
 
-
 def play(model_name, env, newdf, feature_weights):
 	GAMMA = 0.9
 	count=0
@@ -28,10 +27,10 @@ def play(model_name, env, newdf, feature_weights):
 
 		# Choose an action
 		action = trained_model.predict(np.asarray([np.asarray(state)]))[0]
-		next_state, reward = env.step(state, action, feature_weights)
+		state, reward = env.step(state, action, feature_weights)
 
 		if count > 100:
-			featureExpectations += (GAMMA**(count-100))*next_state
+			featureExpectations += (GAMMA**(count-100))*state
 
 		if count % 2000 == 0:
 			print("Ending the trajectory")

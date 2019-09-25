@@ -18,7 +18,7 @@ import scipy
 def data_processing():
   print("Loading the raw data file... ")
   # IMPORTING THE RAW DATA OF SUBOPTIMAL POLICY
-  df = pd.read_csv('raw_data.txt', sep='\t', engine='python', nrows=100000, encoding= 'utf-16')
+  df = pd.read_csv('raw_data.txt', sep='\t', engine='python', nrows=1000, encoding= 'utf-16')
   print("/*************/")
   print("File loaded... ")
 

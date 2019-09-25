@@ -62,8 +62,8 @@ class Environment:
 		else:
 			self.current_action = list(self.current_action)
 
-		stack_ = [self.current_state, self.current_action]
-		stack_ = sum(stack_, [])
+		stack_ = [self.current_state, [self.current_action]]
+		stack_ = reduce(operator.concat, stack_)
 		stack_ = np.asarray(stack_)
 		a = [stack_]
 		a = np.asarray(a)
@@ -81,10 +81,13 @@ def load_trained_weights(feature_weights):
 
 	trained_weights = trained_weights.split()
 	tw = []
-	for i in range(len(trained_weights) - 1):
-		if i == 0:
+	print(len(trained_weights))
+	for i in range(1,len(trained_weights)):
+		print(i)
+		if i == (len(trained_weights)-1):
 			temp = trained_weights[i]
-			temp = temp.replace('[', '')
+			temp = temp.replace(']', '')
+			print(temp)
 			tw.append(float(temp))
 		else:
 			tw.append(float(trained_weights[i]))
@@ -111,10 +114,12 @@ def test_play(model_name, env, newdf, feature_weights):
 
 		# Choose an action
 		action = trained_model.predict(np.asarray([np.asarray(state)]))[0]
-		state, reward = env.step(state, action, trained_weights)
-		print("*********")
+		print("old state:", state)
+		next_state, reward = env.step(state, action, trained_weights)
+		print("new state", next_state)
+		print("***********")
 		if count > 100:
-			featureExpectations += (GAMMA**(count-100))*state
+			featureExpectations += (GAMMA**(count-100))*next_state
 			reward_list.append(reward)
 
 		if count % 2000 == 0:
@@ -122,6 +127,7 @@ def test_play(model_name, env, newdf, feature_weights):
 			mean_reward = np.mean(reward_list)
 			SD_reward = np.std(reward_list)
 			break 
+		state = next_state
 
 
 	return featureExpectations, mean_reward, SD_reward

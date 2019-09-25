@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd 
 import daytime
 import re 
+import os
 from scipy.stats.stats import pearsonr
 import matplotlib
 matplotlib.use('TkAgg')
@@ -12,6 +13,7 @@ import scipy
 from cvxopt import matrix, solvers 
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.models import load_model
 import tensorflow as tf
 from keras import losses
 from keras.optimizers import Adam
@@ -19,6 +21,8 @@ from collections import deque
 import data_process
 import simulator
 import random
+import operator
+import functools
 
 
 
@@ -52,7 +56,11 @@ newdf = create_data(newdf)
 #########################################################################
 ########## LEARN THE TRANSITION MODEL ON SUB OPTIMAL DATA ###############
 #########################################################################
-transition_model = simulator.simulator(newdf)
+f_name = "transition_model.h5"
+if os.path.isfile(f_name):
+	transition_model = load_model(f_name)
+else:
+	transition_model = simulator.simulator(newdf)
 
 
 
@@ -83,9 +91,11 @@ class Environment:
 
 		stack_ = [self.current_state, self.current_action]
 		stack_ = sum(stack_, [])
+		print(stack_)
 		stack_ = np.asarray(stack_)
 		a = [stack_]
 		a = np.asarray(a)
+		print(a)
 		self.next_state = self.transition_model.predict(a)
 		self.reward = np.sum(np.multiply(self.W.tolist()[0], self.next_state.tolist()[0]), axis=0)
 		return self.next_state[0], self.reward

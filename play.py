@@ -27,13 +27,14 @@ def play(model_name, env, newdf, feature_weights):
 
 		# Choose an action
 		action = trained_model.predict(np.asarray([np.asarray(state)]))[0]
-		state, reward = env.step(state, action, feature_weights)
+		next_state, reward = env.step(state, action, feature_weights)
 
 		if count > 100:
-			featureExpectations += (GAMMA**(count-100))*state
+			featureExpectations += (GAMMA**(count-100))*next_state
 
 		if count % 2000 == 0:
 			print("Ending the trajectory")
 			break 
-
+		state = next_state
+		
 	return featureExpectations

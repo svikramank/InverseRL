@@ -59,7 +59,7 @@ def simulator(newdf):
 	model.compile(loss='logcosh', optimizer= Adam(lr= 0.0001))
 
 	print("Started training...")
-	model.fit(X_stack, y_stack, epochs=NUM_OF_EPOCHS, verbose=1)
+	model.fit(X_stack, y_stack, epochs=NUM_OF_EPOCHS, verbose=1, batch_size=64)
 	print("Simulator trained to predict s' from (s,a)...")
 
 	model.save("transition_model.h5")

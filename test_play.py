@@ -62,8 +62,9 @@ class Environment:
 		else:
 			self.current_action = list(self.current_action)
 
-		stack_ = [self.current_state, [self.current_action]]
-		stack_ = reduce(operator.concat, stack_)
+		stack_ = [self.current_state, self.current_action]
+		stack_ = sum(stack_, [])
+# 		stack_ = reduce(operator.concat, stack_)
 		stack_ = np.asarray(stack_)
 		a = [stack_]
 		a = np.asarray(a)
